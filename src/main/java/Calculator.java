@@ -51,11 +51,9 @@ public class Calculator {
         List<String> tmp = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
             if (i < idx - 1) {
-                System.out.println(i + " " + idx + " " + list.get(i));
                 tmp.add(list.get(i));
             } else if (i == idx) tmp.add(String.valueOf(result));
             else if (i > idx + 1) {
-                System.out.println(i + " " + idx + " " + list.get(i));
                 tmp.add(list.get(i));
             }
         }
