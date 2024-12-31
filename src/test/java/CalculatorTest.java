@@ -127,6 +127,16 @@ class CalculatorTest {
         softly.assertAll();
     }
 
+    @Test
+    @DisplayName("괄호 앞에 숫자가 있는 식을 계산할 수 있다")
+    void calculate_brackets() {
+        softly.assertThat(calc.calculateExpression("10 + 3(2 + 3)")).isEqualTo(25);
+        softly.assertThat(calc.calculateExpression("2(2 + 1) * 4")).isEqualTo(24);
+        softly.assertThat(calc.calculateExpression("12(4 - 2) / 6")).isEqualTo(4);
+        softly.assertThat(calc.calculateExpression("7(10 / 5) + 1")).isEqualTo(15);
+        softly.assertAll();
+    }
+
     @Nested
     @DisplayName("계산 테스트 케이스")
     class Calculate_expression_testcase {
