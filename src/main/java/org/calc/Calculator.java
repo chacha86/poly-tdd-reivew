@@ -36,6 +36,12 @@ public class Calculator {
         while (bracketEndIndex != -1) {
             bracketEndIndex = trimedExpression.indexOf(')');
             bracketStartIndex = trimedExpression.lastIndexOf('(', bracketEndIndex);
+            // 괄호 앞에 숫자가 있는 경우
+            if (0 < bracketStartIndex && !isOperator(expressionBuilder.charAt(bracketStartIndex - 1))) {
+                expressionBuilder.insert(bracketStartIndex, '*');
+                bracketStartIndex++;
+                bracketEndIndex++;
+            }
             if (bracketStartIndex != -1) {
                 expressionBuilder.replace(
                         bracketStartIndex,
