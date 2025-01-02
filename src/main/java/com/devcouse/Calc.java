@@ -2,19 +2,20 @@ package com.devcouse;
 
 public class Calc {
 
-    public int run(String expression) {
+    public float run(String expression) {
 
         expression = expression.replaceAll(" ", "");
+        float result = calculator(expression);
 
-        return calculator(expression);
+        return result % 1 == 0 ? (int) result : result;
     }
 
-    private int calculator(String expression) {
+    private float calculator(String expression) {
         if (expression.contains("(")) {
             int startIndex = expression.lastIndexOf("(");
             int endIndex = findClosingParenthesis(expression, startIndex);
 
-            int inner = calculator(expression.substring(startIndex + 1, endIndex));
+            float inner = calculator(expression.substring(startIndex + 1, endIndex));
             expression = expression.substring(0, startIndex) + inner + expression.substring(endIndex + 1);
 
             return calculator(expression);
@@ -22,11 +23,11 @@ public class Calc {
 
         int index = findLowestOperatorIndex(expression);
         if (index == -1) {
-            return Integer.parseInt(expression);
+            return Float.parseFloat(expression);
         }
 
-        int left = calculator(expression.substring(0, index));
-        int right = calculator(expression.substring(index+1));
+        float left = calculator(expression.substring(0, index));
+        float right = calculator(expression.substring(index+1));
 
         return basicOperations(left, right, expression.charAt(index));
     }
@@ -74,8 +75,8 @@ public class Calc {
         return Integer.MAX_VALUE;
     }
 
-    private int basicOperations(int left, int right, char o) {
-        int result = 0;
+    private float basicOperations(float left, float right, char o) {
+        float result = 0;
 
         switch (o) {
             case '+' -> result = left + right;

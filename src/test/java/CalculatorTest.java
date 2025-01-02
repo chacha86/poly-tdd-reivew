@@ -85,8 +85,7 @@ public class CalculatorTest {
     @Test
     @DisplayName("최종 테스트: ((3 + 5) * 5 + -10) * 10 / 5 == 60")
     public void test_Final() {
-        int rs = calc.run("((3 + 5) * 5 + -10) * 10 / 5");
-        assertThat(rs).isEqualTo(60);
+        assertThat(calc.run("((3 + 5) * 5 + -10) * 10 / 5")).isEqualTo(60);
     }
 
     @Test
@@ -270,5 +269,11 @@ public class CalculatorTest {
                 () ->calc.run("(1 + 2"));
 
         assertEquals(exception.getMessage(), "괄호가 올바르지 않습니다: (1+2");
+    }
+
+    @Test
+    @DisplayName("5/2 == 2.5")
+    void t31() {
+        assertThat(calc.run("5/ 2")).isEqualTo(2.5f);
     }
 }
