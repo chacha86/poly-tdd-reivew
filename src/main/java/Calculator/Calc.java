@@ -24,9 +24,7 @@ public class Calc {
     private int calculateBasic(String expression) {
         List<String> tokens = new ArrayList<>(Arrays.asList(expression.split(" ")));
 
-        // 곱셈 나눗셈 우선 계산
         tokens = tokensCalculate(tokens, "*", "/");
-        // 덧셈 뺄샘 이후 계산
         tokens = tokensCalculate(tokens, "+", "-");
 
         return Integer.parseInt(tokens.get(0));
