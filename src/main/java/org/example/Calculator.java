@@ -6,8 +6,11 @@ import java.util.stream.Collectors;
 
 public class Calculator {
 
-    public Number run(String s){
+    public static Number run(String s){
         List<String> parsed = parseInput(s);
+
+        if(parsed.size() == 1)
+            return Integer.parseInt(parsed.get(0));
 
         int idx = findFirstHighPriorityOperand(parsed);
         String op1 = parsed.get(idx-1);
@@ -27,7 +30,7 @@ public class Calculator {
                 throw new IllegalStateException("Unexpected value: " + operand);
         };
         if(parsed.size() == 3)
-            return number;
+            return number.intValue();
 
         parsed.remove(idx-1);
         parsed.remove(idx-1);
@@ -35,7 +38,7 @@ public class Calculator {
         return run(String.join(" ", parsed));
     }
 
-    private int findFirstHighPriorityOperand(List<String> parsed) {
+    private static int findFirstHighPriorityOperand(List<String> parsed) {
         for(int idx = 0; idx < parsed.size(); idx++) {
             if (parsed.get(idx).equals("*") || parsed.get(idx).equals("/"))
                 return idx;
@@ -43,8 +46,7 @@ public class Calculator {
         return 1;
     }
 
-
-    public List<String> parseInput(String s){
+    private static List<String> parseInput(String s){
         String tmp = removeParentheses(s);
         return Arrays.stream(tmp.split(" ")).collect(Collectors.toList());
     }
@@ -64,8 +66,6 @@ public class Calculator {
             s = s.substring(0, startIdx) +
                     res + s.substring(endIdx + 1);
         }
-        return tmp;
+        return s;
     }
-
-
 }
