@@ -49,14 +49,19 @@ public class Calculator {
         return Arrays.stream(tmp.split(" ")).collect(Collectors.toList());
     }
 
-    private String removeParentheses(String s) {
-        int startIdx = s.indexOf("(");
-        int endIdx = s.lastIndexOf(")");
-        Number res;
-        String tmp= s;
-        if(startIdx != -1 && endIdx != -1){
-            res= run(s.substring(startIdx+1, endIdx));
-            tmp = s.substring(0, startIdx) +
+    private static String removeParentheses(String s) {
+        int startIdx =-1;
+        int endIdx =-1;
+        while(true){
+            startIdx = s.lastIndexOf("(");
+            endIdx = s.indexOf(")", startIdx);
+            if(startIdx == -1 && endIdx == -1)
+                break;
+
+            Number res;
+
+            res = run(s.substring(startIdx + 1, endIdx));
+            s = s.substring(0, startIdx) +
                     res + s.substring(endIdx + 1);
         }
         return tmp;
